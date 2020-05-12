@@ -42,28 +42,16 @@ const Dashboard: React.FC = () => {
 
       const transactonsFormated = returnTransactions.map(tr => {
         // eslint-disable-next-line no-param-reassign
-        tr.formattedValue = Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(tr.value);
+        tr.formattedValue = formatValue(tr.value);
         tr.formattedDate = Intl.DateTimeFormat('pt-br').format(
           new Date(tr.created_at),
         );
         return tr;
       });
       const balanceFormated: Balance = {
-        income: Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(Number(returnBalance.income)),
-        outcome: Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(Number(returnBalance.outcome)),
-        total: Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }).format(Number(returnBalance.total)),
+        income: formatValue(Number(returnBalance.income)),
+        outcome: formatValue(Number(returnBalance.outcome)),
+        total: formatValue(Number(returnBalance.total)),
       };
 
       setTransactions(transactonsFormated);
